@@ -1,6 +1,5 @@
 package com.lando.recyclerviewrefresh.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -22,26 +21,21 @@ internal class ArticlesRecyclerViewAdapterWithPayload(private val onArticleBookm
         return ArticleViewHolder(itemBinding)
     }
 
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        Log.e("NEKI", "regular onBindViewHolder")
-        holder.bind(getItem(position)) {
-            onArticleBookmarkClicked(ArticleId(it.id))
-        }
-    }
-
     override fun onBindViewHolder(
         holder: ArticleViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
-        Log.e("NEKI", "withPayloads onBindViewHolder")
-        Log.e("NEKI", "payloads: $payloads")
-
-
         when (val latestPayload = payloads.lastOrNull()) {
             is ArticleChangePayload.Comments -> holder.bindCommentsCount(latestPayload.newCommentsCount)
             is ArticleChangePayload.Bookmark -> holder.bindBookmarkState(latestPayload.bookmarked)
             else -> onBindViewHolder(holder, position)
+        }
+    }
+
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+        holder.bind(getItem(position)) {
+            onArticleBookmarkClicked(ArticleId(it.id))
         }
     }
 
