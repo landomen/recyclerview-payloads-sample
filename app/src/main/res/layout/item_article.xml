@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:elevation="2dp"
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:id="@+id/ivArticle"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@android:color/holo_blue_light" />
+
+    <View
+        android:id="@+id/ivGradient"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_gradient_dark"
+        app:layout_constraintBottom_toBottomOf="@id/ivArticle"
+        app:layout_constraintEnd_toEndOf="@id/ivArticle"
+        app:layout_constraintStart_toStartOf="@id/ivArticle" />
+
+    <View
+        android:id="@+id/ivGradient2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_gradient_dark_inverse"
+        app:layout_constraintTop_toTopOf="@id/ivArticle"
+        app:layout_constraintEnd_toEndOf="@id/ivArticle"
+        app:layout_constraintStart_toStartOf="@id/ivArticle" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="4dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/tvCommentCount"
+        app:layout_constraintEnd_toEndOf="@id/ivArticle"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/ivArticle"
+        tools:text="Title for this article" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/blue_dark"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/ivArticle"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/ivArticle"
+        app:layout_constraintTop_toTopOf="@id/ivArticle"
+        tools:text="Description" />
+
+    <TextView
+        android:id="@+id/tvCommentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/gray"
+        android:textSize="10sp"
+        app:drawableStartCompat="@drawable/ic_comment"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/ivArticle"
+        app:layout_constraintEnd_toEndOf="@id/ivArticle"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/ivArticle"
+        tools:ignore="SmallSp"
+        tools:text="234" />
+
+    <ImageButton
+        android:id="@+id/ibBookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/like_or_unlike_this_article"
+        android:padding="12dp"
+        android:layout_margin="4dp"
+        app:layout_constraintEnd_toEndOf="@id/ivArticle"
+        app:layout_constraintTop_toTopOf="@id/ivArticle"
+        app:srcCompat="@drawable/ic_bookmark_inactive" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
