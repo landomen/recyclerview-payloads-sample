@@ -27,11 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
 
-        lifecycleScope.launch {
-            viewModel.articlesFlow.collect { articles ->
-                adapter.submitList(articles)
-            }
-        }
+        bindStateUpdates()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_refresh -> {
-                viewModel.refreshArticles()
+                viewModel.onUserAction(MainViewModel.Action.RefreshClicked)
                 true
             }
 
@@ -55,9 +51,17 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.bookmarkArticle(articleId.id)
 //        }
         adapter = ArticlesRecyclerViewAdapterWithPayload { articleId ->
-            viewModel.bookmarkArticle(articleId.id)
+            viewModel.onUserAction(MainViewModel.Action.ArticleBookmarkClicked(articleId.id))
         }
         binding.rvArticles.adapter = adapter
         binding.rvArticles.setHasFixedSize(true)
+    }
+
+    private fun bindStateUpdates() {
+        lifecycleScope.launch {
+            viewModel.stateFlow.collect { state ->
+                adapter.submitList(state.articles)
+            }
+        }
     }
 }

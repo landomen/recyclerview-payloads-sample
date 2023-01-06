@@ -41,8 +41,8 @@ object DummyArticleRepository {
         )
     )
 
-    private val _articlesFlow = MutableStateFlow(originalArticles)
-    val articlesFlow = _articlesFlow.asStateFlow()
+    private val articlesMutableFlow = MutableStateFlow(originalArticles)
+    val articlesFlow = articlesMutableFlow.asStateFlow()
 
     suspend fun refreshArticles() {
         val updatedArticles = articlesFlow.value.map {
@@ -50,7 +50,7 @@ object DummyArticleRepository {
                 commentsCount = it.commentsCount + generateCommentsCount()
             )
         }
-        _articlesFlow.emit(updatedArticles)
+        articlesMutableFlow.emit(updatedArticles)
     }
 
     suspend fun bookmarkArticle(articleId: String) {
@@ -61,7 +61,7 @@ object DummyArticleRepository {
                 it
             }
         }
-        _articlesFlow.emit(updatedArticles)
+        articlesMutableFlow.emit(updatedArticles)
     }
 
     private fun generateArticle(

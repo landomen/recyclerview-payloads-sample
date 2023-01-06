@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.lando.recyclerviewrefresh.R
 import com.lando.recyclerviewrefresh.databinding.ItemArticleBinding
 import com.lando.recyclerviewrefresh.ui.model.UiArticle
 
@@ -72,13 +71,7 @@ internal class ArticlesRecyclerViewAdapterWithPayload(private val onArticleBookm
         }
 
         internal fun bindBookmarkState(bookmarked: Boolean) {
-            itemBinding.ibBookmark.setImageResource(
-                if (bookmarked) {
-                    R.drawable.ic_bookmark_active
-                } else {
-                    R.drawable.ic_bookmark_inactive
-                }
-            )
+            itemBinding.ibBookmark.isSelected = bookmarked
         }
 
         private fun bindImage(imageUrl: String) {

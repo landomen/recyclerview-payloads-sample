@@ -14,16 +14,24 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
 
-    val articlesFlow: Flow<List<UiArticle>> = DummyArticleRepository.articlesFlow
+    val stateFlow: Flow<State> = DummyArticleRepository.articlesFlow
         .map { articles -> articles.map { it.mapToUiArticle() } }
+        .map { articles -> State(articles) }
 
-    fun refreshArticles() {
+    fun onUserAction(action: Action) {
+        when (action) {
+            is Action.ArticleBookmarkClicked -> bookmarkArticle(action.articleId)
+            Action.RefreshClicked -> refreshArticles()
+        }
+    }
+
+    private fun refreshArticles() {
         viewModelScope.launch {
             DummyArticleRepository.refreshArticles()
         }
     }
 
-    fun bookmarkArticle(articleId: String) {
+    private fun bookmarkArticle(articleId: String) {
         viewModelScope.launch {
             DummyArticleRepository.bookmarkArticle(articleId)
         }
@@ -38,5 +46,13 @@ class MainViewModel @Inject constructor() : ViewModel() {
             commentsCount = commentsCount,
             bookmarked = bookmarked
         )
+    }
+
+    data class State(val articles: List<UiArticle>)
+
+    sealed interface Action {
+        object RefreshClicked : Action
+
+        data class ArticleBookmarkClicked(val articleId: String) : Action
     }
 }

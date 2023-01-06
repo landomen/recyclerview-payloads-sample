@@ -33,9 +33,9 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="@drawable/bg_gradient_dark_inverse"
-        app:layout_constraintTop_toTopOf="@id/ivArticle"
         app:layout_constraintEnd_toEndOf="@id/ivArticle"
-        app:layout_constraintStart_toStartOf="@id/ivArticle" />
+        app:layout_constraintStart_toStartOf="@id/ivArticle"
+        app:layout_constraintTop_toTopOf="@id/ivArticle" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -94,12 +94,12 @@
         android:id="@+id/ibBookmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/like_or_unlike_this_article"
         android:padding="12dp"
-        android:layout_margin="4dp"
         app:layout_constraintEnd_toEndOf="@id/ivArticle"
         app:layout_constraintTop_toTopOf="@id/ivArticle"
-        app:srcCompat="@drawable/ic_bookmark_inactive" />
+        app:srcCompat="@drawable/selector_ic_bookmark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
