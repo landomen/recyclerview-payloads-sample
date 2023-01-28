@@ -12,7 +12,7 @@ There are two `RecyclerView` adapters, both of which use `DiffUtil` to dispatch 
 Selecting which adapter to use can be done in `MainActivity.setupRecyclerView()` function.
 
 Result without using payloads (`ArticlesRecyclerViewAdapterWithoutPayload`) on the left and with using payloads (`ArticlesRecyclerViewAdapterWithoutPayload`) on the right:
-![noPayloads](https://user-images.githubusercontent.com/16841324/215283638-f9c9cf5a-d0d0-4074-a9d1-a31d458c8576.gif) 
-![payloads](https://user-images.githubusercontent.com/16841324/215283655-2c838c53-5a3d-4cea-8388-d4981ae3951c.gif)
+
+![noPayloads](https://user-images.githubusercontent.com/16841324/215283638-f9c9cf5a-d0d0-4074-a9d1-a31d458c8576.gif) ![payloads](https://user-images.githubusercontent.com/16841324/215283655-2c838c53-5a3d-4cea-8388-d4981ae3951c.gif)
 
 
