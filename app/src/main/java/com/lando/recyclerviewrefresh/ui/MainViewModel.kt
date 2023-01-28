@@ -12,28 +12,36 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: DummyArticleRepository) :
+    ViewModel() {
 
-    val stateFlow: Flow<State> = DummyArticleRepository.articlesFlow
-        .map { articles -> articles.map { it.mapToUiArticle() } }
-        .map { articles -> State(articles) }
+    val stateFlow: Flow<State> =
+        repository.articlesFlow.map { articles -> articles.map { it.mapToUiArticle() } }
+            .map { articles -> State(articles) }
 
     fun onUserAction(action: Action) {
         when (action) {
             is Action.ArticleBookmarkClicked -> bookmarkArticle(action.articleId)
             Action.RefreshClicked -> refreshArticles()
+            Action.ReorderClicked -> reorderArticles()
         }
     }
 
     private fun refreshArticles() {
         viewModelScope.launch {
-            DummyArticleRepository.refreshArticles()
+            repository.refreshArticles()
+        }
+    }
+
+    private fun reorderArticles() {
+        viewModelScope.launch {
+            repository.reorderArticles()
         }
     }
 
     private fun bookmarkArticle(articleId: String) {
         viewModelScope.launch {
-            DummyArticleRepository.bookmarkArticle(articleId)
+            repository.bookmarkArticle(articleId)
         }
     }
 
@@ -52,6 +60,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     sealed interface Action {
         object RefreshClicked : Action
+
+        object ReorderClicked : Action
 
         data class ArticleBookmarkClicked(val articleId: String) : Action
     }

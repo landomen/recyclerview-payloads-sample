@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.lando.recyclerviewrefresh.R
 import com.lando.recyclerviewrefresh.databinding.ActivityMainBinding
 import com.lando.recyclerviewrefresh.ui.adapter.ArticlesRecyclerViewAdapterWithPayload
@@ -42,19 +43,32 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
+            R.id.action_reorder -> {
+                viewModel.onUserAction(MainViewModel.Action.ReorderClicked)
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     private fun setupRecyclerView() {
 //        adapter = ArticlesRecyclerViewAdapterWithoutPayload { articleId ->
-//            viewModel.bookmarkArticle(articleId.id)
+//            viewModel.onUserAction(MainViewModel.Action.ArticleBookmarkClicked(articleId.id))
 //        }
         adapter = ArticlesRecyclerViewAdapterWithPayload { articleId ->
             viewModel.onUserAction(MainViewModel.Action.ArticleBookmarkClicked(articleId.id))
         }
         binding.rvArticles.adapter = adapter
         binding.rvArticles.setHasFixedSize(true)
+
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+
+            override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                // remain scrolled to top for demo purposes
+                binding.rvArticles.scrollToPosition(0)
+            }
+        })
     }
 
     private fun bindStateUpdates() {

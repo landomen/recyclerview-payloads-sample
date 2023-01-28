@@ -2,4 +2,5 @@
     <string name="app_name">RecyclerViewRefresh</string>
     <string name="like_or_unlike_this_article">Like or unlike this article</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="menu_reorder">Reorder</string>
 </resources>

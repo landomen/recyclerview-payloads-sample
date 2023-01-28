@@ -112,7 +112,6 @@ internal class ArticlesRecyclerViewAdapterWithPayload(private val onArticleBookm
         data class Comments(val newCommentsCount: Long) : ArticleChangePayload
 
         data class Bookmark(val bookmarked: Boolean) : ArticleChangePayload
-
     }
 }
 

@@ -73,7 +73,7 @@ internal class ArticlesRecyclerViewAdapterWithoutPayload(private val onArticleBo
     private class ArticleDiffCallback : DiffUtil.ItemCallback<UiArticle>() {
 
         override fun areItemsTheSame(oldItem: UiArticle, newItem: UiArticle): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: UiArticle, newItem: UiArticle): Boolean {
